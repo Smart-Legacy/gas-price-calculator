@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   FaChevronRight,
@@ -9,8 +11,11 @@ import {
 import { RiGasStationLine } from "react-icons/ri";
 import { PiGasCanBold } from "react-icons/pi";
 import { MdOilBarrel } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const FuelPaymentPage = () => {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
@@ -22,7 +27,12 @@ const FuelPaymentPage = () => {
       <div className="mt-4 px-4">
         <div className="space-y-4">
           {/* Subsidy Option */}
-          <button className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full">
+          <button
+            className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
+            onClick={() => {
+              router.push("/fuelchoice/money");
+            }}
+          >
             <div className="flex items-center space-x-3">
               <div className="bg-blue-500 p-1 rounded-3xl">
                 <RiGasStationLine className="text-white text-2xl" />
