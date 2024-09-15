@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const page = ({ params }: { params: { choice: string } }) => {
+  const router = useRouter();
   const [fuelType, setFuelType] = useState<string>("Benzene");
   const [plateRegion, setPlateRegion] = useState<string>("AA");
   const [plateNumber, setPlateNumber] = useState<string>("06104");
@@ -11,7 +13,7 @@ const page = ({ params }: { params: { choice: string } }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <div className="bg-white py-4 px-6 shadow-md flex items-center justify-left gap-2">
+      <div className=" py-4 px-6  flex items-center justify-left gap-2">
         <Link href={"/fuelchoice"}>
           <FaChevronLeft />
         </Link>
@@ -86,8 +88,13 @@ const page = ({ params }: { params: { choice: string } }) => {
       </div>
 
       {/* Next Button */}
-      <div className="mt-8 px-4">
-        <button className="bg-blue-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md">
+      <div className="fixed bottom-0 left-0 w-full px-4 pb-4 mb-4">
+        <button
+          className="bg-blue-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md"
+          onClick={() => {
+            router.push(`/fuelchoice/${params.choice}/payment`);
+          }}
+        >
           Next
         </button>
       </div>
