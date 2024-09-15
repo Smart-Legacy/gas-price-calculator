@@ -4,7 +4,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const page = ({ params }: { params: { choice: string } }) => {
+const Page = ({ params }: { params: { choice: string } }) => {
   const router = useRouter();
   const [fuelType, setFuelType] = useState<string>("Benzene");
   const [plateRegion, setPlateRegion] = useState<string>("AA");
@@ -102,4 +102,4 @@ const page = ({ params }: { params: { choice: string } }) => {
   );
 };
 
-export default page;
+export default Page;
