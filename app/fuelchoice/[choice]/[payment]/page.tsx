@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function FuelPayment() {
   const router = useRouter();
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 p-4 text-black">
       <div className="flex gap-2 mb-4">
         {" "}
         <Link href={"/fuelchoice/choice"} className="mt-1">

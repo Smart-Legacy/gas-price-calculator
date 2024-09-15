@@ -11,7 +11,7 @@ const Page = ({ params }: { params: { choice: string } }) => {
   const [plateNumber, setPlateNumber] = useState<string>("06104");
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 text-black">
       {/* Header */}
       <div className=" py-4 px-6  flex items-center justify-left gap-2">
         <Link href={"/fuelchoice"}>

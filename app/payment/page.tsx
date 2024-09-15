@@ -17,7 +17,7 @@ export default function ProcessingPage() {
   const gasPurchased = ((1 - C) * money) / price;
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-white px-4">
+    <div className="flex flex-col items-center justify-center h-screen bg-white px-4 text-black">
       {/* Processing Icon */}
       <div className="mb-6">
         <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">

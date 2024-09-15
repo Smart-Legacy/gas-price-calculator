@@ -17,7 +17,7 @@ const FuelPaymentPage = () => {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 text-black">
       {/* Header */}
       <div className="bg-white py-4 px-6 shadow-md flex items-center justify-between">
         <h2 className="text-lg font-semibold">Fuel Payment</h2>

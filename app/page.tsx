@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 text-black">
       {/* Header */}
       <div className="bg-green-500 text-white p-4 rounded-b-lg shadow-md">
         <div className="flex justify-between items-center">
