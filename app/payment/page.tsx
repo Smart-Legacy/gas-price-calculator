@@ -1,4 +1,21 @@
 export default function ProcessingPage() {
+  /**
+   * Here we calculate the amount of gas purchased and the amount of money that goes for carbon emission
+   * Let 𝑃 be the price per liter of gas (e.g., 75).
+   * Let 𝐶 be the carbon cut percentage (in this case, 1% or 0.01).
+   * Let 𝑀 be the total amount of money the user pays (e.g., 1000).
+   * The user needs to pay for both gas and the 1% carbon emission cut.
+   * Total cost breakdown: When the user pays 𝑀, 1% of the amount is taken for carbon, and the rest is used to buy gas. So, only (1−𝐶)×𝑀(1−C)×M is used for gas.
+   * For example, if the user pays 1000, only 99% of it (i.e., 0.99 × 1000) is used for gas.
+   * Gas purchased: The user pays 𝑃 per liter, so the amount of gas they get is the money spent on gas divided by the price per liter:
+   * Gas bought=((1−𝐶)×𝑀)/𝑃
+   */
+  const money = 1800;
+  const C = 0.001;
+  const price = 75;
+  const carbonPaidPrice = C * money;
+  const gasPurchased = ((1 - C) * money) / price;
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white px-4">
       {/* Processing Icon */}
@@ -36,6 +53,34 @@ export default function ProcessingPage() {
       {/* Loading Spinner */}
       <div className="mt-8">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+
+      {/* Payment Info Section */}
+      <div className="bg-white p-4 rounded-lg shadow-md space-y-4 w-full">
+        <div className="flex justify-between">
+          <span className="font-semibold">Plate Number</span>
+          <span>1AA06104</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Paid</span>
+          <span>{money} &nbsp; Br</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Fuel Type</span>
+          <span>Benzene</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Gas Price</span>
+          <span>{price} &nbsp; Br</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Purchased Gas Amount</span>
+          <span>{gasPurchased} &nbsp; Br</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Carbon Emission Paid Price</span>
+          <span>{carbonPaidPrice} &nbsp; Br</span>
+        </div>
       </div>
     </div>
   );
