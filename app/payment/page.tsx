@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { usePaymentContext } from "@/context/PaymentContext";
-import html2pdf from "html2pdf.js";
 
 /**
  * Here we calculate the amount of gas purchased and the amount of money that goes for carbon emission
@@ -35,10 +34,10 @@ export default function ProcessingPage() {
     setCarbonPurchased(carbon);
   }, []);
 
-  const handlePrint = () => {
-    const element = billRef.current;
-    if (element != null) {
-      html2pdf().from(element).save();
+  const handlePrint = async () => {
+    if (typeof window !== "undefined" && billRef.current) {
+      const html2pdf = await import("html2pdf.js");
+      html2pdf.default().from(billRef.current).save();
     }
   };
 
