@@ -12,9 +12,12 @@ import { RiGasStationLine } from "react-icons/ri";
 import { PiGasCanBold } from "react-icons/pi";
 import { MdOilBarrel } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { usePaymentContext } from "@/context/PaymentContext";
 
 const FuelPaymentPage = () => {
   const router = useRouter();
+  const { userMoney, paymentData, updatePaymentData, setUserMoney } =
+    usePaymentContext();
 
   return (
     <div className="min-h-screen bg-gray-100 text-black">
@@ -30,7 +33,8 @@ const FuelPaymentPage = () => {
           <button
             className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
             onClick={() => {
-              router.push("/fuelchoice/money");
+              updatePaymentData({ ...paymentData, fuelChoice: "subsidy" });
+              router.push("/fuelchoice/subsidy");
             }}
           >
             <div className="flex items-center space-x-3">

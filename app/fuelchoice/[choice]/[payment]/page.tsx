@@ -1,11 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePaymentContext } from "@/context/PaymentContext";
 
 export default function FuelPayment() {
   const router = useRouter();
+  const { userMoney, paymentData, updatePaymentData, setUserMoney } =
+    usePaymentContext();
+  const [amount, setAmount] = useState<number | undefined>();
+
   return (
     <div className="min-h-screen bg-gray-100 p-4 text-black">
       <div className="flex gap-2 mb-4">
@@ -32,7 +38,7 @@ export default function FuelPayment() {
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Plate Number</span>
-          <span>1AA06104</span>
+          <span>{paymentData.plateNumber}</span>
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Eligible fuel per day in liter</span>
@@ -44,7 +50,7 @@ export default function FuelPayment() {
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Fuel Type</span>
-          <span>Benzene</span>
+          <span>{paymentData.fuelType}</span>
         </div>
       </div>
 
@@ -59,6 +65,8 @@ export default function FuelPayment() {
             type="number"
             placeholder="Enter Amount"
             className="w-5/6"
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
           />
           <span className="block text-right mt-1 text-sm">ETB</span>
         </div>
@@ -69,7 +77,11 @@ export default function FuelPayment() {
         <button
           className="bg-blue-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md"
           onClick={() => {
-            router.push(`/payment`);
+            if (amount != undefined) {
+              setUserMoney(userMoney - amount);
+              updatePaymentData({ ...paymentData, amount: amount });
+              router.push(`/payment`);
+            }
           }}
         >
           Next

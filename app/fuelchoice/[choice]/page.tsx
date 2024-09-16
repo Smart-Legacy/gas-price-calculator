@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePaymentContext } from "@/context/PaymentContext";
 
 const Page = ({ params }: { params: { choice: string } }) => {
   const router = useRouter();
+  const { userMoney, paymentData, updatePaymentData, setUserMoney } =
+    usePaymentContext();
   const [fuelType, setFuelType] = useState<string>("Benzene");
+  const [code, setCode] = useState<string>("1");
   const [plateRegion, setPlateRegion] = useState<string>("AA");
   const [plateNumber, setPlateNumber] = useState<string>("06104");
 
@@ -58,7 +62,11 @@ const Page = ({ params }: { params: { choice: string } }) => {
 
           <div className="mt-4 flex space-x-4">
             {/* Dropdown for first section (e.g., '1') */}
-            <select className="form-select bg-gray-100 border rounded-md p-2">
+            <select
+              className="form-select bg-gray-100 border rounded-md p-2"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            >
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -92,6 +100,11 @@ const Page = ({ params }: { params: { choice: string } }) => {
         <button
           className="bg-blue-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md"
           onClick={() => {
+            updatePaymentData({
+              ...paymentData,
+              fuelType: fuelType,
+              plateNumber: `${code}${plateRegion}${plateNumber}`,
+            });
             router.push(`/fuelchoice/${params.choice}/payment`);
           }}
         >

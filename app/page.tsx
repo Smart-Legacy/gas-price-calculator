@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import {
   FaEye,
   FaEyeSlash,
@@ -10,8 +11,13 @@ import {
   FaEllipsisH,
 } from "react-icons/fa";
 import Link from "next/link";
+import { usePaymentContext } from "@/context/PaymentContext";
 
 const HomePage = () => {
+  const { userMoney, paymentData, updatePaymentData, setUserMoney } =
+    usePaymentContext();
+  const [show, setShow] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-100 text-black">
       {/* Header */}
@@ -20,9 +26,26 @@ const HomePage = () => {
           <div>
             <h2 className="text-xl font-bold">Hi, Daniel</h2>
             <p className="text-sm">
-              Balance (ETB) <FaEyeSlash className="inline" />
+              Balance (ETB){" "}
+              {show ? (
+                <FaEye
+                  className="inline"
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                />
+              ) : (
+                <FaEyeSlash
+                  className="inline"
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                />
+              )}
             </p>
-            <p className="text-sm font-semibold">*********</p>
+            <p className="text-sm font-semibold">
+              {show ? userMoney : "*********"}
+            </p>
           </div>
           <div className="flex space-x-4">
             <FaSearch className="text-xl" />
