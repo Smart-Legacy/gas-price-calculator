@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { usePaymentContext } from "@/context/PaymentContext";
+import html2pdf from "html2pdf.js";
 
 /**
  * Here we calculate the amount of gas purchased and the amount of money that goes for carbon emission
@@ -17,6 +18,7 @@ import { usePaymentContext } from "@/context/PaymentContext";
  */
 
 export default function ProcessingPage() {
+  const billRef = useRef(null);
   const { userMoney, paymentData, updatePaymentData, setUserMoney } =
     usePaymentContext();
   const router = useRouter();
@@ -34,7 +36,10 @@ export default function ProcessingPage() {
   }, []);
 
   const handlePrint = () => {
-    window.print();
+    const element = billRef.current;
+    if (element != null) {
+      html2pdf().from(element).save();
+    }
   };
 
   // const money = 1800;
@@ -43,7 +48,10 @@ export default function ProcessingPage() {
   // const gasPurchased1 = ((1 - C) * money) / price;
 
   return (
-    <div className="flex flex-col items-center  h-screen bg-white px-4 text-black mb-6 pt-12">
+    <div
+      className="bill flex flex-col items-center  h-screen bg-white px-4 text-black mb-6 pt-12"
+      ref={billRef}
+    >
       {/* Processing Icon */}
       <div className="mb-6">
         <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
