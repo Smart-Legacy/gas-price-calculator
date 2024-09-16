@@ -33,13 +33,17 @@ export default function ProcessingPage() {
     setCarbonPurchased(carbon);
   }, []);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   // const money = 1800;
 
   // const carbonPaidPrice = C * money;
   // const gasPurchased1 = ((1 - C) * money) / price;
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-white px-4 text-black">
+    <div className="flex flex-col items-center  h-screen bg-white px-4 text-black mb-6 pt-12">
       {/* Processing Icon */}
       <div className="mb-6">
         <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
@@ -59,10 +63,12 @@ export default function ProcessingPage() {
       </div>
 
       {/* Processing Text */}
-      <div className="text-center mb-6">
-        <h1 className="text-xl font-semibold">Processing</h1>
-        <p className="text-gray-500">Wait for customer confirmation</p>
-      </div>
+      {gasPurchased == undefined || carbonPurchased == undefined ? (
+        <div className="text-center mb-6">
+          <h1 className="text-xl font-semibold">Processing</h1>
+          <p className="text-gray-500">Wait for customer confirmation</p>
+        </div>
+      ) : null}
 
       {/* Amount */}
       <div className="text-center">
@@ -106,7 +112,13 @@ export default function ProcessingPage() {
       )}
 
       {/* Fixed finish Button at the Bottom */}
-      <div className="fixed bottom-0 left-0 w-full px-4 pb-4 mb-2">
+      <div className="fixed bottom-0 left-0 w-full px-4 pb-4 mb-1">
+        <button
+          onClick={handlePrint}
+          className="bg-green-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md mb-2"
+        >
+          Print Bill
+        </button>
         <button
           className="bg-blue-600 text-white w-full py-3 rounded-lg text-lg font-semibold shadow-md"
           onClick={() => {

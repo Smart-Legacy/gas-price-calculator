@@ -48,7 +48,16 @@ const FuelPaymentPage = () => {
           </button>
 
           {/* Without Subsidy Option */}
-          <button className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full">
+          <button
+            className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
+            onClick={() => {
+              updatePaymentData({
+                ...paymentData,
+                fuelChoice: "Without Subsidy",
+              });
+              router.push("/fuelchoice/withoutsubsidy");
+            }}
+          >
             <div className="flex items-center space-x-3">
               <div className="bg-yellow-500 p-1 rounded-3xl">
                 <RiGasStationLine className="text-white text-2xl" />
@@ -59,7 +68,16 @@ const FuelPaymentPage = () => {
           </button>
 
           {/* Organization Fuel Payment Option */}
-          <button className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full">
+          <button
+            className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
+            onClick={() => {
+              updatePaymentData({
+                ...paymentData,
+                fuelChoice: " Organization Fuel Payment (Coupon)",
+              });
+              router.push("/fuelchoice/organization");
+            }}
+          >
             <div className="flex items-center space-x-3">
               <div className="bg-green-500 p-1 rounded-3xl">
                 <FaReceipt className="text-white text-2xl" />
@@ -72,7 +90,13 @@ const FuelPaymentPage = () => {
           </button>
 
           {/* Barrel Option */}
-          <button className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full">
+          <button
+            className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
+            onClick={() => {
+              updatePaymentData({ ...paymentData, fuelChoice: "Barrel" });
+              router.push("/fuelchoice/barrel");
+            }}
+          >
             <div className="flex items-center space-x-3">
               <div className="bg-green-500 p-1 rounded-3xl">
                 <MdOilBarrel className="text-white text-2xl" />
@@ -83,7 +107,13 @@ const FuelPaymentPage = () => {
           </button>
 
           {/* Kerosene Option */}
-          <button className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full">
+          <button
+            className="bg-white flex justify-between items-center p-4 rounded shadow-md w-full"
+            onClick={() => {
+              updatePaymentData({ ...paymentData, fuelChoice: "Kerosene" });
+              router.push("/fuelchoice/kerosene");
+            }}
+          >
             <div className="flex items-center space-x-3">
               <div className="bg-blue-500 p-1 rounded-3xl">
                 <PiGasCanBold className="text-white text-2xl" />
