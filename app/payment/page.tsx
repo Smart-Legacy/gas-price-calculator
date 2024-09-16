@@ -35,7 +35,7 @@ export default function ProcessingPage() {
   }, []);
 
   const handlePrint = async () => {
-    if (typeof window !== "undefined" && billRef.current) {
+    if (billRef.current) {
       const html2pdf = await import("html2pdf.js");
       html2pdf.default().from(billRef.current).save();
     }
